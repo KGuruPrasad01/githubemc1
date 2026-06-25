@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guru Prasad K - DevOps Engineer CV</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        header .title {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        header .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 0.9em;
+        }
+
+        header .contact-info a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        header .contact-info a:hover {
+            border-bottom-color: white;
+            opacity: 0.8;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            border-left: 4px solid #667eea;
+            padding-left: 20px;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .section h2 {
+            font-size: 1.8em;
+            color: #667eea;
+            margin-bottom: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .section h2:hover {
+            color: #764ba2;
+            transform: translateX(5px);
+        }
+
+        .toggle-icon {
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+
+        .section.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+
+        .section-content {
+            max-height: 1000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .section.collapsed .section-content {
+            max-height: 0;
+        }
+
+        .summary {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            line-height: 1.8;
+            font-size: 1.05em;
+            color: #555;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            background: #e8f0ff;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .skill-category h3 {
+            color: #667eea;
+            margin-bottom: 12px;
+            font-size: 1.1em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            user-select: none;
+        }
+
+        .skill-toggle-icon {
+            font-size: 1em;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category.collapsed .skill-toggle-icon {
+            transform: rotate(-90deg);
+        }
+
+        .skill-description {
+            color: #555;
+            font-size: 0.95em;
+            line-height: 1.6;
+            max-height: 500px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .skill-category.collapsed .skill-description {
+            max-height: 0;
+        }
+
+        .experience-item,
+        .project-item,
+        .cert-item {
+            background: #f8f9fa;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .experience-item:hover,
+        .project-item:hover,
+        .cert-item:hover {
+            background: #e8f0ff;
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .experience-item h3 {
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 1.15em;
+        }
+
+        .experience-item .company {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .experience-item .period {
+            color: #999;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .experience-item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .experience-item li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #555;
+        }
+
+        .experience-item li:before {
+            content: "►";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+        }
+
+        .project-item h3 {
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+
+        .project-item p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .cert-item {
+            border-left: 4px solid #764ba2;
+        }
+
+        .cert-item:hover {
+            background: #f0e8ff;
+        }
+
+        .education-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+            transition: all 0.3s ease;
+        }
+
+        .education-item:hover {
+            background: #f0e8ff;
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.2);
+        }
+
+        .education-item h3 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .education-item .college {
+            color: #764ba2;
+            font-weight: 600;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #667eea;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5em;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            background: #764ba2;
+            transform: scale(1.1);
+        }
+
+        .back-to-top.show {
+            display: flex;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 25px;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            header .contact-info {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding-left: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>GURU PRASAD K</h1>
+            <div class="title">DevOps & AWS Cloud Engineer</div>
+            <div class="contact-info">
+                <a href="https://www.linkedin.com/in/k-guru-prasad/" target="_blank">LinkedIn Profile</a>
+            </div>
+        </header>
+
+        <div class="content">
+            <!-- Professional Summary -->
+            <div class="section">
+                <h2>
+                    <span class="toggle-icon">▼</span>
+                    Professional Summary
+                </h2>
+                <div class="section-content">
+                    <div class="summary">
+                        DevOps and AWS Cloud Engineer with 1 year of hands-on experience specializing in cloud infrastructure, CI/CD automation, and containerization. Proven track record in optimizing development lifecycles using Jenkins, Docker, and AWS. Adept at leveraging GenAI tools (GitHub Copilot, Gemini) and low-code platforms (n8n, Power Automate) to accelerate automation, streamline workflows, and enhance system reliability.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Skills -->
+            <div class="section">
+                <h2>
+                    <span class="toggle-icon">▼</span>
+                    Technical Skills
+                </h2>
+                <div class="section-content">
+                    <div class="skills-grid">
+                        <div class="skill-category collapsed">
+                            <h3>
+                                <span class="skill-toggle-icon">▼</span>
+                                ☁️ Cloud & Infra
+                            </h3>
+                            <div class="skill-description">AWS (EC2, EKS, S3, VPC, RDS, IAM, Auto Scaling, Route53, CloudWatch), Azure</div>
+                        </div>
+                        <div class="skill-category collapsed">
+                            <h3>
+                                <span class="skill-toggle-icon">▼</span>
+                                🔄 CI/CD & Automation
+                            </h3>
+                            <div class="skill-description">Jenkins, GitHub Webhooks, GitLab CI/CD, Ansible, Terraform (IaC)</div>
+                        </div>
+                        <div class="skill-category collapsed">
+                            <h3>
+                                <span class="skill-toggle-icon">▼</span>
+                                📦 Containers & Monitoring
+                            </h3>
+                            <div class="skill-description">Docker, Kubernetes, Helm, Prometheus, Grafana, Azure Log Analytics</div>
+                        </div>
+                        <div class="skill-category collapsed">
+                            <h3>
+                                <span class="skill-toggle-icon">▼</span>
+                                🛠️ Tools & OS
+                            </h3>
+                            <div class="skill-description">SonarQube, Git, GitHub, GitLab, ValGenesis, Linux (RHEL), Windows Server</div>
+                        </div>
+                        <div class="skill-category collapsed">
+                            <h3>
+                                <span class="skill-toggle-icon">▼</span>
+                                🤖 GenAI & Low-Code
+                            </h3>
+                            <div class="skill-description">GitHub Copilot, Claude, Gemini, n8n, Power Automate</div>
+                        </div>
+                        <div class="skill-category collapsed">
+                            <h3>
+                                <span class="skill-toggle-icon">▼</span>
+                                💻 Scripting
+                            </h3>
+                            <div class="skill-description">Python, Bash</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Professional Experience -->
+            <div class="section">
+                <h2>
+                    <span class="toggle-icon">▼</span>
+                    Professional Experience
+                </h2>
+                <div class="section-content">
+                    <div class="experience-item">
+                        <h3>DevOps Engineer</h3>
+                        <div class="company">Joules to Watts (J2W)</div>
+                        <div class="period">Apr 2025 – Present</div>
+                        <ul>
+                            <li><strong>CI/CD Pipelines:</strong> Built and maintained end-to-end Jenkins pipelines integrated with GitHub/GitLab webhooks to automate build, test, and deployment stages.</li>
+                            <li><strong>Quality & Security:</strong> Integrated SonarQube for static code analysis and quality gates; managed security access policies via AWS IAM and Azure Active Directory.</li>
+                            <li><strong>Containers & IaC:</strong> Developed Dockerfiles, managed container images, and provisioned multi-cloud infrastructure (AWS & Azure) utilizing Terraform.</li>
+                            <li><strong>Monitoring & Automation:</strong> Configured CloudWatch Alarms and Azure Alerts to monitor system metrics; built automated workflows using AWS Lambda, Power Automate, and n8n.</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item">
+                        <h3>MFG IT Engineer</h3>
+                        <div class="company">Newwave Computing Limited</div>
+                        <div class="period">May 2024 – Apr 2025</div>
+                        <ul>
+                            <li><strong>Compliance & GxP:</strong> Managed equipment installation and validation using ValGenesis; drafted IQ/OQ and CSV documentation.</li>
+                            <li><strong>Infra Support:</strong> Administered Windows Server environments, conducted compliance access reviews, performed system backups, and resolved manufacturing floor HMI/automation system faults.</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item">
+                        <h3>IT Desktop Support Engineer</h3>
+                        <div class="company">Newwave Computing Limited</div>
+                        <div class="period">Jun 2022 – May 2024</div>
+                        <ul>
+                            <li><strong>IT Operations:</strong> Provided remote and on-site support across enterprise Windows environments, managing Office 365, DNS, user access control, and corporate asset deployment.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projects -->
+            <div class="section">
+                <h2>
+                    <span class="toggle-icon">▼</span>
+                    Projects
+                </h2>
+                <div class="section-content">
+                    <div class="project-item">
+                        <h3>Automated CI/CD Pipeline (Jenkins & GitHub)</h3>
+                        <p>Engineered an automated pipeline triggered immediately via GitHub Webhooks upon code commits, embedding SonarQube quality checks to guarantee code health before deployment.</p>
+                    </div>
+
+                    <div class="project-item">
+                        <h3>2048 Game Deployment (Docker & AWS EC2)</h3>
+                        <p>Containerized a 2048 web app using Docker and deployed it onto an AWS EC2 instance with persistent EBS storage, achieving public accessibility and system stability.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certifications -->
+            <div class="section">
+                <h2>
+                    <span class="toggle-icon">▼</span>
+                    Certifications
+                </h2>
+                <div class="section-content">
+                    <div class="cert-item">
+                        <strong>Microsoft Certified:</strong> Azure Administrator Associate (AZ-104)
+                    </div>
+                    <div class="cert-item">
+                        <strong>AWS Certified:</strong> Solutions Architect – Learnmore Technology
+                    </div>
+                    <div class="cert-item">
+                        <strong>Certification in:</strong> Chip-Level Laptop & Desktop Hardware Troubleshooting
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education -->
+            <div class="section">
+                <h2>
+                    <span class="toggle-icon">▼</span>
+                    Education
+                </h2>
+                <div class="section-content">
+                    <div class="education-item">
+                        <h3>Bachelor of Computer Applications (BCA)</h3>
+                        <div class="college">St. Vincent Pallotti College, Bengaluru</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>Declaration:</strong> I hereby declare that all the above information is true to the best of my knowledge and belief.</p>
+            <p style="margin-top: 10px; font-size: 0.85em;">Last Updated: June 2026</p>
+        </footer>
+    </div>
+
+    <button class="back-to-top" id="backToTop">↑</button>
+
+    <script>
+        // Toggle sections
+        document.querySelectorAll('.section h2').forEach(heading => {
+            heading.addEventListener('click', function() {
+                this.parentElement.classList.toggle('collapsed');
+            });
+        });
+
+        // Toggle skill categories
+        document.querySelectorAll('.skill-category h3').forEach(heading => {
+            heading.addEventListener('click', function() {
+                this.parentElement.classList.toggle('collapsed');
+            });
+        });
+
+        // Back to top button
+        const backToTopBtn = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Add animation on page load
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.section').forEach((section, index) => {
+                section.style.animation = `fadeIn 0.6s ease-out ${index * 0.1}s both`;
+            });
+        });
+    </script>
+</body>
+</html>
