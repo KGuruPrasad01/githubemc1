@@ -145,56 +145,100 @@
             color: #555;
         }
 
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .skill-category {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .skill-category:hover {
-            background: #e8f0ff;
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
-        }
-
-        .skill-category h3 {
-            color: #667eea;
-            margin-bottom: 12px;
-            font-size: 1.1em;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .skills-marquee {
+            overflow: hidden;
+            position: relative;
+            padding: 8px 0 4px;
+            cursor: grab;
             user-select: none;
+            touch-action: none;
         }
 
-        .skill-toggle-icon {
-            font-size: 1em;
-            transition: transform 0.3s ease;
+        .skills-hint {
+            font-size: 0.9em;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-style: italic;
         }
 
-        .skill-category.collapsed .skill-toggle-icon {
-            transform: rotate(-90deg);
+        .skills-marquee.dragging {
+            cursor: grabbing;
         }
 
-        .skill-description {
+        .skills-track {
+            display: flex;
+            gap: 16px;
+            width: max-content;
+            will-change: transform;
+            transform: translateX(0);
+            transition: transform 0.2s ease;
+        }
+
+        .skills-track.dragging {
+            transition: none;
+        }
+
+        .skill-card {
+            min-width: 240px;
+            max-width: 240px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #eef3ff 100%);
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px solid #dfe7ff;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.12);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.18);
+        }
+
+        .skill-card.active {
+            border-color: #764ba2;
+            box-shadow: 0 8px 20px rgba(118, 75, 162, 0.22);
+        }
+
+        .skill-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        .skill-card ul {
+            list-style: none;
+            padding-left: 0;
             color: #555;
             font-size: 0.95em;
             line-height: 1.6;
-            max-height: 500px;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
         }
 
-        .skill-category.collapsed .skill-description {
-            max-height: 0;
+        .skill-card li {
+            padding-left: 16px;
+            position: relative;
+            margin-bottom: 4px;
+        }
+
+        .skill-card li:before {
+            content: "•";
+            color: #764ba2;
+            position: absolute;
+            left: 0;
+        }
+
+        .skill-details {
+            display: none;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #dfe7ff;
+            color: #4b4b4b;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .skill-card.active .skill-details {
+            display: block;
         }
 
         .experience-item,
@@ -352,8 +396,9 @@
                 padding: 20px;
             }
 
-            .skills-grid {
-                grid-template-columns: 1fr;
+            .skill-card {
+                min-width: 220px;
+                max-width: 220px;
             }
 
             .section {
@@ -368,6 +413,8 @@
             <h1>GURU PRASAD K</h1>
             <div class="title">DevOps & AWS Cloud Engineer</div>
             <div class="contact-info">
+                <span>+91 9449530539</span>
+                <a href="mailto:guru2014g3@gmail.com">guru2014g3@gmail.com</a>
                 <a href="https://www.linkedin.com/in/k-guru-prasad/" target="_blank">LinkedIn Profile</a>
             </div>
         </header>
@@ -388,53 +435,67 @@
 
             <!-- Technical Skills -->
             <div class="section">
-                <h2>
+                <h2 id="skillsSectionToggle" aria-controls="skillsSectionContent" aria-expanded="true">
                     <span class="toggle-icon">▼</span>
                     Technical Skills
                 </h2>
-                <div class="section-content">
-                    <div class="skills-grid">
-                        <div class="skill-category collapsed">
-                            <h3>
-                                <span class="skill-toggle-icon">▼</span>
-                                ☁️ Cloud & Infra
-                            </h3>
-                            <div class="skill-description">AWS (EC2, EKS, S3, VPC, RDS, IAM, Auto Scaling, Route53, CloudWatch), Azure</div>
-                        </div>
-                        <div class="skill-category collapsed">
-                            <h3>
-                                <span class="skill-toggle-icon">▼</span>
-                                🔄 CI/CD & Automation
-                            </h3>
-                            <div class="skill-description">Jenkins, GitHub Webhooks, GitLab CI/CD, Ansible, Terraform (IaC)</div>
-                        </div>
-                        <div class="skill-category collapsed">
-                            <h3>
-                                <span class="skill-toggle-icon">▼</span>
-                                📦 Containers & Monitoring
-                            </h3>
-                            <div class="skill-description">Docker, Kubernetes, Helm, Prometheus, Grafana, Azure Log Analytics</div>
-                        </div>
-                        <div class="skill-category collapsed">
-                            <h3>
-                                <span class="skill-toggle-icon">▼</span>
-                                🛠️ Tools & OS
-                            </h3>
-                            <div class="skill-description">SonarQube, Git, GitHub, GitLab, ValGenesis, Linux (RHEL), Windows Server</div>
-                        </div>
-                        <div class="skill-category collapsed">
-                            <h3>
-                                <span class="skill-toggle-icon">▼</span>
-                                🤖 GenAI & Low-Code
-                            </h3>
-                            <div class="skill-description">GitHub Copilot, Claude, Gemini, n8n, Power Automate</div>
-                        </div>
-                        <div class="skill-category collapsed">
-                            <h3>
-                                <span class="skill-toggle-icon">▼</span>
-                                💻 Scripting
-                            </h3>
-                            <div class="skill-description">Python, Bash</div>
+                <div class="section-content" id="skillsSectionContent">
+                    <div class="skills-marquee" id="skillsMarquee">
+                        <div class="skills-track" id="skillsTrack">
+                            <div class="skill-card">
+                                <h3>☁️ Cloud & Infra</h3>
+                                <ul>
+                                    <li>AWS EC2, EKS, S3</li>
+                                    <li>VPC, IAM, RDS</li>
+                                    <li>Route 53, CloudWatch</li>
+                                </ul>
+                                <div class="skill-details">Designs and manages scalable AWS and Azure environments with strong focus on networking, access control, monitoring, and production resilience.</div>
+                            </div>
+                            <div class="skill-card">
+                                <h3>🔄 CI/CD & Automation</h3>
+                                <ul>
+                                    <li>Jenkins Pipelines</li>
+                                    <li>GitHub & GitLab Webhooks</li>
+                                    <li>Ansible, Terraform</li>
+                                </ul>
+                                <div class="skill-details">Builds reliable pipelines and automation flows for deployments, testing, and release coordination with minimal manual intervention.</div>
+                            </div>
+                            <div class="skill-card">
+                                <h3>📦 Containers & Monitoring</h3>
+                                <ul>
+                                    <li>Docker, Kubernetes</li>
+                                    <li>Helm, Prometheus</li>
+                                    <li>Grafana, Azure Monitor</li>
+                                </ul>
+                                <div class="skill-details">Runs containerized applications and monitors service health with observability tools to support uptime and incident response.</div>
+                            </div>
+                            <div class="skill-card">
+                                <h3>🛠️ Tools & Platforms</h3>
+                                <ul>
+                                    <li>Git, GitHub, GitLab</li>
+                                    <li>SonarQube, ValGenesis</li>
+                                    <li>Linux, Windows Server</li>
+                                </ul>
+                                <div class="skill-details">Uses Git, GitHub, GitLab, SonarQube, and enterprise platforms to support collaboration, compliance, and operational efficiency.</div>
+                            </div>
+                            <div class="skill-card">
+                                <h3>🤖 GenAI & Low-Code</h3>
+                                <ul>
+                                    <li>GitHub Copilot</li>
+                                    <li>Claude, Gemini</li>
+                                    <li>n8n, Power Automate</li>
+                                </ul>
+                                <div class="skill-details">Leverages GenAI assistants and workflow automation platforms to speed up documentation, process automation, and repetitive operational tasks.</div>
+                            </div>
+                            <div class="skill-card">
+                                <h3>💻 Scripting & Coding</h3>
+                                <ul>
+                                    <li>Python, Bash</li>
+                                    <li>Shell Automation</li>
+                                    <li>Cloud-native scripting</li>
+                                </ul>
+                                <div class="skill-details">Creates automation scripts in Python and Bash to simplify provisioning, configuration, and day-to-day operational work.</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -542,19 +603,139 @@
     <button class="back-to-top" id="backToTop">↑</button>
 
     <script>
-        // Toggle sections
+        // Toggle sections on click
         document.querySelectorAll('.section h2').forEach(heading => {
-            heading.addEventListener('click', function() {
-                this.parentElement.classList.toggle('collapsed');
+            heading.addEventListener('click', (event) => {
+                event.preventDefault();
+                const section = heading.parentElement;
+                if (section.classList.contains('section')) {
+                    section.classList.toggle('collapsed');
+                    const isCollapsed = section.classList.contains('collapsed');
+                    heading.setAttribute('aria-expanded', String(!isCollapsed));
+                }
             });
         });
 
-        // Toggle skill categories
-        document.querySelectorAll('.skill-category h3').forEach(heading => {
-            heading.addEventListener('click', function() {
-                this.parentElement.classList.toggle('collapsed');
+        const marquee = document.getElementById('skillsMarquee');
+        const track = document.getElementById('skillsTrack');
+        const skillCards = document.querySelectorAll('.skill-card');
+
+        if (marquee && track) {
+            let isDragging = false;
+            let startX = 0;
+            let startTranslate = 0;
+            let currentTranslate = 0;
+            let dragTriggered = false;
+            let maxTranslate = 0;
+            let velocityX = 0;
+            let lastX = 0;
+            let lastTime = 0;
+            let animationFrame = null;
+
+            const clampTranslate = (value) => Math.max(maxTranslate, Math.min(0, value));
+
+            const updateBounds = () => {
+                maxTranslate = Math.min(0, marquee.clientWidth - track.scrollWidth - 20);
+                currentTranslate = clampTranslate(currentTranslate);
+                track.style.transform = `translateX(${currentTranslate}px)`;
+            };
+
+            const stopMomentum = () => {
+                if (animationFrame) {
+                    cancelAnimationFrame(animationFrame);
+                    animationFrame = null;
+                }
+            };
+
+            const runMomentum = () => {
+                if (!isDragging) {
+                    if (Math.abs(velocityX) > 0.05) {
+                        currentTranslate = clampTranslate(currentTranslate + velocityX);
+                        velocityX *= 0.92;
+                        track.style.transform = `translateX(${currentTranslate}px)`;
+                        animationFrame = requestAnimationFrame(runMomentum);
+                    } else {
+                        stopMomentum();
+                    }
+                }
+            };
+
+            updateBounds();
+            window.addEventListener('resize', updateBounds);
+
+            marquee.addEventListener('pointerdown', (event) => {
+                if (event.button !== 0) return;
+                isDragging = true;
+                dragTriggered = false;
+                startX = event.clientX;
+                startTranslate = currentTranslate;
+                lastX = event.clientX;
+                lastTime = performance.now();
+                velocityX = 0;
+                stopMomentum();
+                marquee.classList.add('dragging');
+                track.classList.add('dragging');
+                track.setPointerCapture(event.pointerId);
             });
-        });
+
+            marquee.addEventListener('pointermove', (event) => {
+                if (!isDragging) return;
+                const delta = event.clientX - startX;
+                const now = performance.now();
+                const elapsed = Math.max(16, now - lastTime);
+                velocityX = (event.clientX - lastX) / elapsed * 16;
+                lastX = event.clientX;
+                lastTime = now;
+
+                if (Math.abs(delta) > 4) {
+                    dragTriggered = true;
+                }
+                currentTranslate = clampTranslate(startTranslate + delta);
+                track.style.transform = `translateX(${currentTranslate}px)`;
+            });
+
+            const endDrag = (event) => {
+                if (!isDragging) return;
+                isDragging = false;
+                marquee.classList.remove('dragging');
+                track.classList.remove('dragging');
+                if (event.pointerId !== undefined) {
+                    try {
+                        track.releasePointerCapture(event.pointerId);
+                    } catch (error) {
+                        // Ignore release errors
+                    }
+                }
+
+                if (Math.abs(velocityX) > 0.2) {
+                    runMomentum();
+                }
+            };
+
+            marquee.addEventListener('pointerup', endDrag);
+            marquee.addEventListener('pointerleave', endDrag);
+            marquee.addEventListener('pointercancel', endDrag);
+
+            skillCards.forEach(card => {
+                card.addEventListener('click', (event) => {
+                    if (dragTriggered) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        dragTriggered = false;
+                        return;
+                    }
+
+                    const isOpen = card.classList.contains('active');
+                    skillCards.forEach(item => item.classList.remove('active'));
+
+                    if (isOpen) {
+                        card.classList.remove('active');
+                    } else {
+                        card.classList.add('active');
+                    }
+                });
+            });
+        }
 
         // Back to top button
         const backToTopBtn = document.getElementById('backToTop');
