@@ -50,4 +50,5 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/githubemc1-app:latest
+        # Using your explicit Docker Hub username string directly in the tag format
+        tags: kguruprasad01/githubemc1-app:latest
