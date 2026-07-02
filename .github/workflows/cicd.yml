@@ -51,4 +51,4 @@ jobs:
         context: .
         push: true
         # Using your explicit Docker Hub username string directly in the tag format
-        tags: kguruprasad01/githubemc1-app:latest
+        tags: guru2014/githubemc1-app:latest
