@@ -1,3 +1,4 @@
+# ansible/deploy.yml
 ---
 - name: Deploy Java Web App to Local Minikube
   hosts: localhost
@@ -5,7 +6,19 @@
   tasks:
     - name: Apply Kubernetes Deployment and Service Manifests
       kubernetes.core.k8s:
-        state: present
         src: ../k8s/deployment.yml
-        kubeconfig: "/home/gk11/.kube/config"
-        namespace: default
+        state: present
+
+    - name: Force Rolling Update to Pull Fresh Images
+      kubernetes.core.k8s:
+        definition:
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: githubemc1-deployment
+            namespace: default
+          spec:
+            template:
+              metadata:
+                annotations:
+                  rollout-timestamp: "{{ ansible_date_time.iso8601 }}"
