@@ -8,7 +8,7 @@
     <artifactId>githubemc1</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-  <properties>
+    <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,10 +28,27 @@
 
     <build>
         <plugins>
+            <!-- 1. Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
+            </plugin>
+
+            <!-- 2. Executable JAR Builder Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <!-- Note: Make sure this matches your actual package + main class name -->
+                            <mainClass>com.example.MainApp</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -1,0 +1,11 @@
+---
+- name: Deploy Java Web App to Local Minikube
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Apply Kubernetes Deployment and Service Manifests
+      kubernetes.core.k8s:
+        state: present
+        src: ../k8s/deployment.yml
+        kubeconfig: "/home/gk11/.kube/config"
+        namespace: default
