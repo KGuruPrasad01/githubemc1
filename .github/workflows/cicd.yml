@@ -11,13 +11,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # Bumping to checkout@v4.2.2 or higher forces the latest sub-build targeting Node 24
     - name: Checkout Source Code
-      uses: actions/checkout@v4       # Upgraded minor patch handles Node 24
+      uses: actions/checkout@v4.2.2
       with:
         fetch-depth: 0
 
+    # Bumping setup-java to v4.5.0+ or v5 ensures native Node 24 compilation
     - name: Set up JDK 17
-      uses: actions/setup-java@v4     # V4/V5 releases natively migrated to Node 24
+      uses: actions/setup-java@v4.5.0
       with:
         java-version: '17'
         distribution: 'temurin'
@@ -26,7 +28,6 @@ jobs:
     - name: Build and Test with Maven
       run: mvn clean package
 
-    # Ensures your code is scanned before building the final image
     - name: Run SonarCloud Static Code Analysis
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -37,18 +38,17 @@ jobs:
           -Dsonar.organization=kguruprasad01 \
           -Dsonar.projectKey=KGuruPrasad01_githubemc1
 
-    # Log in to your free Docker Hub registry using production stable actions
+    # Pin to the stable production version (v3 is the current official major for Node 24 compatibility)
     - name: Log in to Docker Hub
-      uses: docker/login-action@v3
+      uses: docker/login-action@v3.3.0
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    # Build the image based on the Dockerfile and push it up
+    # Pin to the stable production version (v6 is the current official major)
     - name: Build and Push Docker Image
-      uses: docker/build-push-action@v6
+      uses: docker/build-push-action@v6.13.0
       with:
         context: .
         push: true
-        # Using your explicit Docker Hub username string directly in the tag format
         tags: guru2014/githubemc1-app:latest
