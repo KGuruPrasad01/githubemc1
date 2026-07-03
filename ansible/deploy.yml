@@ -3,11 +3,23 @@
 - name: Deploy Java Web App to Local Minikube
   hosts: localhost
   connection: local
+  gather_facts: no
+  
+  pre_tasks:
+    - name: Ensure kubernetes python library is installed in Ansible's environment
+      pip:
+        name: kubernetes
+        state: present
+        extra_args: --break-system-packages
+      vars:
+        ansible_python_interpreter: "{{ ansible_playbook_python }}"
+
   tasks:
     - name: Apply Kubernetes Deployment and Service Manifests
       kubernetes.core.k8s:
         src: ../k8s/deployment.yml
         state: present
+        namespace: default
 
     - name: Force Rolling Update to Pull Fresh Images
       kubernetes.core.k8s:
@@ -21,4 +33,5 @@
             template:
               metadata:
                 annotations:
-                  rollout-timestamp: "{{ ansible_date_time.iso8601 }}"
+                  # Fixes the undefined error by using native Jinja2 time tracking
+                  rollout-timestamp: "{{ now(utc=true).isoformat() }}"

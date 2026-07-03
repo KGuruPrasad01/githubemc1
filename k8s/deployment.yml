@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: githubemc1-deployment
+  namespace: default # <-- Add here
   labels:
     app: githubemc1
 spec:
@@ -26,6 +27,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: githubemc1-service
+  namespace: default # <-- Add here
 spec:
   type: NodePort
   selector:
