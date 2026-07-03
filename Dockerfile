@@ -4,15 +4,13 @@ FROM eclipse-temurin:17-jre-alpine
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the compiled JAR file from the Maven build stage into the container
-COPY target/*.jar app.jar
+# Copy the specific JAR. 
+# Note: Ensure you only have one JAR in target/ or rename it to 'app.jar' explicitly.
+COPY target/githubemc1-1.0-SNAPSHOT.jar app.jar
 
 # Expose port 8080 for web traffic
 EXPOSE 8080
 
 # Command to run the application
-# If running a regular executable jar built by spring-boot-maven-plugin:
+# We use ENTRYPOINT to define the primary executable of the image
 ENTRYPOINT ["java", "-jar", "app.jar"]
-
-# If you are passing the main class string explicitly:
-CMD ["java", "-cp", "app.jar", "com.example.MainApp"]
