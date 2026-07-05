@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.2.0
 
       # Instead of using a file from your repo, download it dynamically
       - name: Install Minikube
@@ -24,7 +24,7 @@ jobs:
           fetch-depth: 0
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4     # V4/V5 releases natively migrated to Node 24
+        uses: actions/setup-java@v4.5.0    # V4/V5 releases natively migrated to Node 24
         with:
           java-version: '17'
           distribution: 'temurin'

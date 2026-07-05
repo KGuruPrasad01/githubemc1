@@ -41,7 +41,7 @@
     <configuration>
         <archive>
             <manifest>
-                <mainClass>com.example.MainApp</mainClass>
+                <mainClass>com.guru.demo.HelloWorld</mainClass>
             </manifest>
         </archive>
     </configuration>
